@@ -1,6 +1,8 @@
 package com.fpt.models;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Project {
     private Long id;
@@ -10,25 +12,21 @@ public class Project {
     private ProjectStatus status;
     private LocalDateTime startDate;
     private LocalDateTime deadline;
-    private double budget;
-    private double hourlyRate;
-    private double timeSpent; // в часах
-    private double actualIncome;
+    private Double budget;
+    private Double hourlyRate;
+    private Long timeSpent; // в минутах
+    private Double actualIncome;
     private ProjectSource source;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private List<String> categories;
 
-    public enum ProjectStatus {
-        IN_PROGRESS,
-        COMPLETED,
-        CANCELLED
-    }
-
-    public enum ProjectSource {
-        UPWORK,
-        OTHER
-    }
-
-    // Конструктор
     public Project() {
+        this.categories = new ArrayList<>();
+        this.status = ProjectStatus.NEW;
+        this.source = ProjectSource.OTHER;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     // Геттеры и сеттеры
@@ -88,35 +86,35 @@ public class Project {
         this.deadline = deadline;
     }
 
-    public double getBudget() {
+    public Double getBudget() {
         return budget;
     }
 
-    public void setBudget(double budget) {
+    public void setBudget(Double budget) {
         this.budget = budget;
     }
 
-    public double getHourlyRate() {
+    public Double getHourlyRate() {
         return hourlyRate;
     }
 
-    public void setHourlyRate(double hourlyRate) {
+    public void setHourlyRate(Double hourlyRate) {
         this.hourlyRate = hourlyRate;
     }
 
-    public double getTimeSpent() {
+    public Long getTimeSpent() {
         return timeSpent;
     }
 
-    public void setTimeSpent(double timeSpent) {
+    public void setTimeSpent(Long timeSpent) {
         this.timeSpent = timeSpent;
     }
 
-    public double getActualIncome() {
+    public Double getActualIncome() {
         return actualIncome;
     }
 
-    public void setActualIncome(double actualIncome) {
+    public void setActualIncome(Double actualIncome) {
         this.actualIncome = actualIncome;
     }
 
@@ -128,36 +126,46 @@ public class Project {
         this.source = source;
     }
 
-    // Методы для расчета показателей
-    public double calculateHourlyEarning() {
-        if (timeSpent <= 0) {
-            return 0;
-        }
-        return actualIncome / timeSpent;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public double calculateProjectProgress() {
-        if (deadline == null || startDate == null) {
-            return 0;
-        }
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 
-        LocalDateTime now = LocalDateTime.now();
-        long totalDuration = deadline.toEpochSecond(java.time.ZoneOffset.UTC) -
-                startDate.toEpochSecond(java.time.ZoneOffset.UTC);
-        long elapsedDuration = now.toEpochSecond(java.time.ZoneOffset.UTC) -
-                startDate.toEpochSecond(java.time.ZoneOffset.UTC);
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
 
-        if (totalDuration <= 0) {
-            return 0;
-        }
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
-        return Math.min(100.0, (elapsedDuration * 100.0) / totalDuration);
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
+
+    // Вспомогательные методы
+    public double getHoursSpent() {
+        return timeSpent != null ? timeSpent / 60.0 : 0.0;
     }
 
     public boolean isOverdue() {
-        if (deadline == null) {
-            return false;
-        }
-        return LocalDateTime.now().isAfter(deadline);
+        return deadline != null && LocalDateTime.now().isAfter(deadline);
     }
-}
+
+    public double getProjectProgress() {
+        if (budget == null || actualIncome == null) return 0.0;
+        return (actualIncome / budget) * 100.0;
+    }
+
+    public double getEffectiveHourlyRate() {
+        if (timeSpent == null || timeSpent == 0 || actualIncome == null) return 0.0;
+        return (actualIncome / (timeSpent / 60.0));
+    }
+} 

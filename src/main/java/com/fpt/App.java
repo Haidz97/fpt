@@ -5,26 +5,34 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import java.io.IOException;
+import java.net.URL;
 
 public class App extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        // Загрузка главного окна из FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainWindow.fxml"));
-        Parent root = loader.load();
+    public void start(Stage primaryStage) {
+        try {
+            URL mainFxmlUrl = getClass().getResource("/fxml/MainWindow.fxml");
+            if (mainFxmlUrl == null) {
+                throw new IOException("Cannot find MainWindow.fxml");
+            }
 
-        Scene scene = new Scene(root, 1200, 800);
+            FXMLLoader loader = new FXMLLoader(mainFxmlUrl);
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 1200, 800);
 
-        // Загрузка стилей
-        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+            primaryStage.setTitle("Freelance Project Tracker");
+            primaryStage.setScene(scene);
+            primaryStage.show();
 
-        primaryStage.setTitle("Freelance Project Tracker");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        } catch (IOException e) {
+            System.err.println("Error starting application: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-}
+} 

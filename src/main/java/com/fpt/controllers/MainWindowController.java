@@ -1,7 +1,11 @@
 package com.fpt.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
+import java.io.IOException;
+import java.net.URL;
 
 public class MainWindowController {
 
@@ -9,8 +13,13 @@ public class MainWindowController {
     private StackPane contentArea;
 
     @FXML
+    private void initialize() {
+        showDashboard(); // По умолчанию показываем дашборд
+    }
+
+    @FXML
     private void showDashboard() {
-        // TODO: Реализовать отображение дашборда
+        loadView("Dashboard.fxml");
     }
 
     @FXML
@@ -43,9 +52,21 @@ public class MainWindowController {
         // TODO: Реализовать синхронизацию с Upwork
     }
 
-    @FXML
-    private void initialize() {
-        // Инициализация при запуске
-        showDashboard(); // По умолчанию показываем дашборд
+    private void loadView(String fxmlFile) {
+        try {
+            URL fxmlUrl = getClass().getResource("/fxml/" + fxmlFile);
+            if (fxmlUrl == null) {
+                throw new IOException("Cannot find FXML file: " + fxmlFile);
+            }
+
+            FXMLLoader loader = new FXMLLoader(fxmlUrl);
+            Parent view = loader.load();
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(view);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading view: " + e.getMessage());
+        }
     }
-}
+} 
