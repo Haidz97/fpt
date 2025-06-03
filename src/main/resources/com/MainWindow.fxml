@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.fpt.controllers.MainWindowController"
+            prefHeight="800.0" prefWidth="1200.0">
+
+    <!-- Левое меню -->
+    <left>
+        <VBox spacing="10" styleClass="sidebar">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Button text="Дашборд" maxWidth="Infinity" onAction="#showDashboard"/>
+            <Button text="Проекты" maxWidth="Infinity" onAction="#showProjects"/>
+            <Button text="Календарь" maxWidth="Infinity" onAction="#showCalendar"/>
+            <Button text="Статистика" maxWidth="Infinity" onAction="#showStatistics"/>
+            <Button text="Отчеты" maxWidth="Infinity" onAction="#showReports"/>
+            <Button text="Настройки" maxWidth="Infinity" onAction="#showSettings"/>
+        </VBox>
+    </left>
+
+    <!-- Основное содержимое -->
+    <center>
+        <StackPane fx:id="contentArea">
+            <!-- Здесь будет отображаться содержимое разных разделов -->
+        </StackPane>
+    </center>
+
+    <!-- Верхняя панель -->
+    <top>
+        <HBox spacing="10" styleClass="top-bar">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Label text="Freelance Project Tracker" styleClass="app-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Синхронизировать с Upwork" onAction="#syncWithUpwork"/>
+        </HBox>
+    </top>
+
+</BorderPane>
