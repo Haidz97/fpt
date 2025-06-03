@@ -22,7 +22,7 @@ public class Project {
 
     public Project() {
         this.timeEntries = new ArrayList<>();
-        this.status = ProjectStatus.NOT_STARTED;
+        this.status = ProjectStatus.NEW;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
