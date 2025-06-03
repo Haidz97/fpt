@@ -1,8 +1,10 @@
 package com.fpt.models;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import com.fpt.models.ProjectStatus;
 
 public class Project {
     private Long id;
@@ -10,21 +12,17 @@ public class Project {
     private String description;
     private String client;
     private ProjectStatus status;
-    private LocalDateTime startDate;
-    private LocalDateTime deadline;
-    private Double budget;
-    private Double hourlyRate;
-    private Long timeSpent; // в минутах
-    private Double actualIncome;
-    private ProjectSource source;
+    private LocalDate startDate;
+    private LocalDate deadline;
+    private double budget;
+    private double hourlyRate;
+    private List<TimeEntry> timeEntries;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private List<String> categories;
 
     public Project() {
-        this.categories = new ArrayList<>();
-        this.status = ProjectStatus.NEW;
-        this.source = ProjectSource.OTHER;
+        this.timeEntries = new ArrayList<>();
+        this.status = ProjectStatus.NOT_STARTED;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -70,60 +68,48 @@ public class Project {
         this.status = status;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDateTime deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 
-    public Double getBudget() {
+    public double getBudget() {
         return budget;
     }
 
-    public void setBudget(Double budget) {
+    public void setBudget(double budget) {
         this.budget = budget;
     }
 
-    public Double getHourlyRate() {
+    public double getHourlyRate() {
         return hourlyRate;
     }
 
-    public void setHourlyRate(Double hourlyRate) {
+    public void setHourlyRate(double hourlyRate) {
         this.hourlyRate = hourlyRate;
     }
 
-    public Long getTimeSpent() {
-        return timeSpent;
+    public List<TimeEntry> getTimeEntries() {
+        return timeEntries;
     }
 
-    public void setTimeSpent(Long timeSpent) {
-        this.timeSpent = timeSpent;
+    public void setTimeEntries(List<TimeEntry> timeEntries) {
+        this.timeEntries = timeEntries;
     }
 
-    public Double getActualIncome() {
-        return actualIncome;
-    }
-
-    public void setActualIncome(Double actualIncome) {
-        this.actualIncome = actualIncome;
-    }
-
-    public ProjectSource getSource() {
-        return source;
-    }
-
-    public void setSource(ProjectSource source) {
-        this.source = source;
+    public void addTimeEntry(TimeEntry timeEntry) {
+        this.timeEntries.add(timeEntry);
     }
 
     public LocalDateTime getCreatedAt() {
@@ -142,30 +128,27 @@ public class Project {
         this.updatedAt = updatedAt;
     }
 
-    public List<String> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<String> categories) {
-        this.categories = categories;
-    }
-
     // Вспомогательные методы
-    public double getHoursSpent() {
-        return timeSpent != null ? timeSpent / 60.0 : 0.0;
+    public double getTotalTimeSpent() {
+        return timeEntries.stream()
+                .filter(entry -> entry.getEndTime() != null)
+                .mapToLong(TimeEntry::getDurationInMinutes)
+                .sum() / 60.0;
     }
 
-    public boolean isOverdue() {
-        return deadline != null && LocalDateTime.now().isAfter(deadline);
+    public double getTotalEarned() {
+        return getTotalTimeSpent() * hourlyRate;
     }
 
-    public double getProjectProgress() {
-        if (budget == null || actualIncome == null) return 0.0;
-        return (actualIncome / budget) * 100.0;
+    public double getRemainingBudget() {
+        return budget - getTotalEarned();
     }
 
-    public double getEffectiveHourlyRate() {
-        if (timeSpent == null || timeSpent == 0 || actualIncome == null) return 0.0;
-        return (actualIncome / (timeSpent / 60.0));
+    public boolean isOverBudget() {
+        return getTotalEarned() > budget;
+    }
+
+    public boolean isDeadlineMissed() {
+        return deadline != null && LocalDate.now().isAfter(deadline);
     }
 } 

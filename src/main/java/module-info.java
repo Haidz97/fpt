@@ -4,7 +4,11 @@ module com.example.fpt {
     requires javafx.graphics;
     requires javafx.web;
     requires java.sql;
-
+//    requires kernel;
+//    requires layout;
+    requires kernel;
+    requires layout;
+    
 
 
     opens fxml to javafx.fxml, javafx.graphics;
@@ -17,5 +21,6 @@ module com.example.fpt {
 //    exports com.fpt.db to javafx.graphics;
     exports com.fpt.models;
     exports com.fpt.db;
+    exports com.fpt.services;
 
 }

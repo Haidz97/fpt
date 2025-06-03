@@ -104,21 +104,15 @@
         <!-- PDF Generation -->
         <dependency>
             <groupId>com.itextpdf</groupId>
-            <artifactId>itext7-core</artifactId>
+            <artifactId>kernel</artifactId>
             <version>7.2.5</version>
-            <type>pom</type>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.github.almasb</groupId>-->
-<!--            <artifactId>fxgl</artifactId>-->
-<!--            <version>17.3</version>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.openjfx</groupId>-->
-<!--                    <artifactId>*</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>layout</artifactId>
+            <version>7.2.5</version>
+        </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>

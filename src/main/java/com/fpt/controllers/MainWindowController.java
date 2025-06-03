@@ -24,7 +24,7 @@ public class MainWindowController {
 
     @FXML
     private void showProjects() {
-        // TODO: Реализовать отображение списка проектов
+        loadView("Projects.fxml");
     }
 
     @FXML
@@ -56,7 +56,12 @@ public class MainWindowController {
         try {
             URL fxmlUrl = getClass().getResource("/fxml/" + fxmlFile);
             if (fxmlUrl == null) {
-                throw new IOException("Cannot find FXML file: " + fxmlFile);
+                System.err.println("FXML file not found: /fxml/" + fxmlFile);
+                // Попробуем альтернативный путь
+                fxmlUrl = getClass().getResource("/com/fpt/" + fxmlFile);
+                if (fxmlUrl == null) {
+                    throw new IOException("Cannot find FXML file: " + fxmlFile);
+                }
             }
 
             FXMLLoader loader = new FXMLLoader(fxmlUrl);
