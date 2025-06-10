@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.fpt.controllers.ProjectFormController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <GridPane vgap="10" hgap="10">
+        <Label text="Название проекта:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Описание:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextArea fx:id="descriptionArea" wrapText="true" prefRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Клиент:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="clientField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Статус:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <ComboBox fx:id="statusComboBox" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+        <Label text="Дата начала:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+        <Label text="Дедлайн:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <DatePicker fx:id="deadlinePicker" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+        <Label text="Бюджет:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+        <TextField fx:id="budgetField" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+        <Label text="Почасовая ставка:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+        <TextField fx:id="hourlyRateField" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+    </GridPane>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Сохранить" onAction="#handleSave"/>
+        <Button text="Отмена" onAction="#handleCancel"/>
+    </HBox>
+</VBox> 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.fpt.controllers.WorkloadMonitorController"
+      styleClass="workload-monitor">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <!-- Текущая нагрузка -->
+    <TitledPane text="Текущая нагрузка" expanded="true">
+        <VBox spacing="5">
+            <Label fx:id="currentWorkloadLabel" styleClass="workload-status"/>
+            <ProgressBar fx:id="workloadProgressBar" progress="0.0" maxWidth="Infinity"/>
+            <Label fx:id="recommendationLabel" styleClass="recommendation-text" wrapText="true"/>
+        </VBox>
+    </TitledPane>
+
+    <!-- График нагрузки за неделю -->
+    <TitledPane text="Нагрузка за неделю" expanded="true">
+        <BarChart fx:id="weeklyChart" legendVisible="false">
+            <xAxis>
+                <CategoryAxis label="День"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Часы" tickUnit="1"/>
+            </yAxis>
+        </BarChart>
+    </TitledPane>
+
+    <!-- Предупреждения -->
+    <TitledPane text="Предупреждения" expanded="true">
+        <ListView fx:id="alertsList" VBox.vgrow="ALWAYS"/>
+    </TitledPane>
+
+</VBox> 

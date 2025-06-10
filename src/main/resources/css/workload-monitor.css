@@ -1,0 +1,49 @@
+.workload-monitor {
+    -fx-background-color: white;
+}
+
+.workload-status {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.recommendation-text {
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
+}
+
+.progress-bar {
+    -fx-min-height: 20px;
+}
+
+.progress-bar .track {
+    -fx-background-color: #f0f0f0;
+}
+
+.chart-bar {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.titled-pane {
+    -fx-text-fill: #333333;
+}
+
+.titled-pane > .title {
+    -fx-background-color: #f8f8f8;
+    -fx-border-color: #e0e0e0;
+}
+
+.list-view {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+}
+
+.list-cell {
+    -fx-padding: 5px;
+    -fx-background-color: white;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #e8e8e8;
+} 

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
@@ -34,14 +35,25 @@
 
     <!-- Верхняя панель -->
     <top>
-        <HBox spacing="10" styleClass="top-bar">
+        <VBox spacing="5" styleClass="top-bar">
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
-            <Label text="Freelance Project Tracker" styleClass="app-title"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button text="Синхронизировать с Upwork" onAction="#syncWithUpwork"/>
-        </HBox>
+            
+            <!-- Заголовок -->
+            <HBox spacing="10">
+                <Label text="Freelance Project Tracker" styleClass="app-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Импорт проектов" onAction="#showImportDialog"/>
+            </HBox>
+            
+            <!-- Статус синхронизации -->
+            <HBox fx:id="syncStatusBar" spacing="10" visible="false" managed="false">
+                <Label fx:id="lastSyncLabel" styleClass="sync-status"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <ProgressBar fx:id="syncProgressBar" progress="0" visible="false"/>
+            </HBox>
+        </VBox>
     </top>
 
 </BorderPane> 

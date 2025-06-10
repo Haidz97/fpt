@@ -1,26 +1,31 @@
 module com.example.fpt {
     requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.graphics;
     requires javafx.web;
+    requires javafx.swing;
+    requires javafx.media;
+    requires org.controlsfx.controls;
+    requires com.dlsc.formsfx;
+    requires net.synedra.validatorfx;
+    requires org.kordamp.ikonli.javafx;
+    requires org.kordamp.bootstrapfx.core;
+    requires eu.hansolo.tilesfx;
     requires java.sql;
-//    requires kernel;
-//    requires layout;
+    requires org.xerial.sqlitejdbc;
+    requires org.slf4j;
+    requires ch.qos.logback.classic;
     requires kernel;
     requires layout;
-    
+    requires org.apache.poi.poi;
+    requires org.apache.poi.ooxml;
 
-
-    opens fxml to javafx.fxml, javafx.graphics;
+    opens com.fpt to javafx.fxml;
     opens com.fpt.controllers to javafx.fxml;
     opens com.fpt.models to javafx.base;
     
-//    exports com.fpt to javafx.graphics;
     exports com.fpt;
     exports com.fpt.controllers;
-//    exports com.fpt.db to javafx.graphics;
     exports com.fpt.models;
-    exports com.fpt.db;
     exports com.fpt.services;
-
+    exports com.fpt.utils;
 }

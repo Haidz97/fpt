@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.fpt.controllers.ImportDialogController"
+      styleClass="import-dialog">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Выбор платформы -->
+    <Label text="Выберите платформу:"/>
+    <ComboBox fx:id="platformComboBox" maxWidth="Infinity">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Kwork"/>
+                <String fx:value="FL.ru"/>
+                <String fx:value="Freelance.ru"/>
+                <String fx:value="YouDo"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <!-- Авторизация -->
+    <TitledPane text="Авторизация" expanded="true">
+        <VBox spacing="10">
+            <Label text="API Ключ:"/>
+            <TextField fx:id="apiKeyField" promptText="Введите API ключ"/>
+            <Label text="Или импортируйте файл:"/>
+            <HBox spacing="10">
+                <TextField fx:id="filePathField" HBox.hgrow="ALWAYS" editable="false" promptText="Выберите файл CSV/Excel"/>
+                <Button text="Обзор" onAction="#handleBrowse"/>
+            </HBox>
+        </VBox>
+    </TitledPane>
+
+    <!-- Настройки импорта -->
+    <TitledPane text="Настройки" expanded="true">
+        <VBox spacing="10">
+            <CheckBox fx:id="importCompletedCheckBox" text="Импортировать завершенные проекты"/>
+            <CheckBox fx:id="updateExistingCheckBox" text="Обновить существующие проекты"/>
+            <CheckBox fx:id="importTimeEntriesCheckBox" text="Импортировать записи времени"/>
+        </VBox>
+    </TitledPane>
+
+    <!-- Кнопки -->
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Отмена" onAction="#handleCancel"/>
+        <Button text="Импорт" onAction="#handleImport" defaultButton="true"/>
+    </HBox>
+
+</VBox> 

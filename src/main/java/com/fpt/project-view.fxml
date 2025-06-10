@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.fpt.controllers.ProjectViewController"
+      spacing="10" alignment="TOP_CENTER">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Toolbar с кнопками действий -->
+    <ToolBar>
+        <Button fx:id="exportButton" text="Export to PDF"
+                onAction="#handleExportToPdf"/>
+    </ToolBar>
+
+    <!-- Основная информация о проекте -->
+    <GridPane vgap="10" hgap="10">
+        <Label text="Project Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label fx:id="projectNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Client:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Label fx:id="clientLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Label fx:id="statusLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Start Date:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <Label fx:id="startDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+        <Label text="Deadline:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <Label fx:id="deadlineLabel" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+        <Label text="Budget:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <Label fx:id="budgetLabel" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+        <Label text="Hourly Rate:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+        <Label fx:id="hourlyRateLabel" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+    </GridPane>
+
+    <!-- Описание проекта -->
+    <TitledPane text="Description" expanded="false">
+        <TextArea fx:id="descriptionArea" wrapText="true" editable="false"/>
+    </TitledPane>
+
+    <!-- Таблица записей времени -->
+    <TitledPane text="Time Entries" VBox.vgrow="ALWAYS">
+        <TableView fx:id="timeEntriesTable">
+            <columns>
+                <TableColumn fx:id="dateColumn" text="Date"/>
+                <TableColumn fx:id="startTimeColumn" text="Start Time"/>
+                <TableColumn fx:id="endTimeColumn" text="End Time"/>
+                <TableColumn fx:id="durationColumn" text="Duration"/>
+                <TableColumn fx:id="descriptionColumn" text="Description"/>
+            </columns>
+        </TableView>
+    </TitledPane>
+
+    <!-- Итоговая информация -->
+    <GridPane vgap="5" hgap="10">
+        <Label text="Total Time:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label fx:id="totalTimeLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Total Earned:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Label fx:id="totalEarnedLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Budget Remaining:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Label fx:id="remainingBudgetLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    </GridPane>
+
+</VBox> 

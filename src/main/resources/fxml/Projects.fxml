@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.fpt.controllers.ProjectsController">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <HBox spacing="10">
+        <Button text="Новый проект" onAction="#handleAddProject"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Обновить" onAction="#loadProjects"/>
+    </HBox>
+
+    <TableView fx:id="projectsTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="nameColumn" text="Название" prefWidth="200"/>
+            <TableColumn fx:id="clientColumn" text="Клиент" prefWidth="150"/>
+            <TableColumn fx:id="statusColumn" text="Статус" prefWidth="100"/>
+            <TableColumn fx:id="startDateColumn" text="Дата начала" prefWidth="100"/>
+            <TableColumn fx:id="deadlineColumn" text="Дедлайн" prefWidth="100"/>
+            <TableColumn fx:id="budgetColumn" text="Бюджет" prefWidth="100"/>
+        </columns>
+        <contextMenu>
+            <ContextMenu>
+                <items>
+                    <MenuItem text="Редактировать" onAction="#editProject"/>
+                    <MenuItem text="Удалить" onAction="#deleteProject"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Экспорт в PDF" onAction="#exportToPdf"/>
+                </items>
+            </ContextMenu>
+        </contextMenu>
+    </TableView>
+</VBox>

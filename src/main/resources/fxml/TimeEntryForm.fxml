@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.fpt.controllers.TimeEntryController"
+      styleClass="time-entry-form">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <Label text="Дата:"/>
+    <DatePicker fx:id="datePicker"/>
+
+    <Label text="Время начала:"/>
+    <TextField fx:id="startTimeField" promptText="HH:mm"/>
+
+    <Label text="Время окончания:"/>
+    <TextField fx:id="endTimeField" promptText="HH:mm" onKeyReleased="#updateWorkloadWarning"/>
+
+    <Label text="Описание:"/>
+    <TextArea fx:id="descriptionArea" wrapText="true" prefRowCount="3"/>
+
+    <!-- Предупреждение о нагрузке -->
+    <Label fx:id="workloadWarningLabel" 
+           wrapText="true"
+           style="-fx-font-weight: bold;"
+           visible="false"/>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Отмена" onAction="#handleCancel"/>
+        <Button text="Сохранить" onAction="#handleSave" defaultButton="true"/>
+    </HBox>
+
+</VBox> 

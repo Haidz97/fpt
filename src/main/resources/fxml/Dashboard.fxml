@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/22"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.fpt.controllers.DashboardController"
+      spacing="20.0">
+
+    <padding>
+        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+    </padding>
+
+    <!-- Верхняя панель с основными метриками -->
+    <HBox spacing="20.0">
+        <VBox spacing="5.0">
+            <Label text="Активные проекты"/>
+            <Label fx:id="activeProjectsCount" text="0"/>
+        </VBox>
+
+        <VBox spacing="5.0">
+            <Label text="Общий доход (месяц)"/>
+            <Label fx:id="monthlyIncome" text="0 руб."/>
+        </VBox>
+
+        <VBox spacing="5.0">
+            <Label text="Средняя почасовая ставка"/>
+            <Label fx:id="averageHourlyRate" text="0 руб./час"/>
+        </VBox>
+
+        <VBox spacing="5.0">
+            <Label text="Часов за неделю"/>
+            <Label fx:id="weeklyHours" text="0"/>
+        </VBox>
+    </HBox>
+
+    <!-- Панель с графиками -->
+    <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+        <!-- График доходов -->
+        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+            <Label text="Доход по месяцам"/>
+            <LineChart fx:id="incomeChart">
+                <xAxis>
+                    <NumberAxis label="Месяц"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Доход (руб.)"/>
+                </yAxis>
+            </LineChart>
+        </VBox>
+
+        <!-- График распределения времени -->
+        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+            <Label text="Распределение времени"/>
+            <PieChart fx:id="timeDistributionChart"/>
+        </VBox>
+    </HBox>
+
+    <!-- Нижняя панель с последними проектами и дедлайнами -->
+    <HBox spacing="20.0">
+        <!-- Последние проекты -->
+        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+            <Label text="Последние проекты"/>
+            <ListView fx:id="recentProjectsList" VBox.vgrow="ALWAYS"/>
+        </VBox>
+
+        <!-- Ближайшие дедлайны -->
+        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+            <Label text="Ближайшие дедлайны"/>
+            <ListView fx:id="upcomingDeadlinesList" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </HBox>
+</VBox> 
