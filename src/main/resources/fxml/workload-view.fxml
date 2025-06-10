@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.fpt.controllers.WorkloadController"
+      stylesheets="@../css/styles.css">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Статистика рабочей нагрузки" styleClass="title-label"/>
+
+    <!-- Статистика за сегодня -->
+    <VBox styleClass="section-box" spacing="10">
+        <Label text="Сегодня" styleClass="section-header"/>
+        <GridPane hgap="10" vgap="5">
+            <Label text="Отработано:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <Label fx:id="hoursWorkedLabel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Осталось до нормы:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <Label fx:id="remainingHoursLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Статус:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <Label fx:id="workloadStatusLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        </GridPane>
+        <Label fx:id="warningLabel" styleClass="warning-label" managed="false" visible="false"/>
+    </VBox>
+
+    <!-- График нагрузки за неделю -->
+    <VBox styleClass="section-box" spacing="10" VBox.vgrow="ALWAYS">
+        <Label text="Нагрузка за неделю" styleClass="section-header"/>
+        <BarChart fx:id="weeklyChart" legendVisible="false">
+            <xAxis>
+                <CategoryAxis label="Дата"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Часы" tickUnit="1"/>
+            </yAxis>
+        </BarChart>
+    </VBox>
+
+    <!-- Рекомендации -->
+    <VBox styleClass="section-box" spacing="10">
+        <Label text="Рекомендации" styleClass="section-header"/>
+        <TextFlow fx:id="recommendationsFlow" styleClass="recommendations-text"/>
+    </VBox>
+
+</VBox>

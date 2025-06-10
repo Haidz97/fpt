@@ -132,8 +132,8 @@ public class Project {
     public double getTotalTimeSpent() {
         return timeEntries.stream()
                 .filter(entry -> entry.getEndTime() != null)
-                .mapToLong(TimeEntry::getDurationInMinutes)
-                .sum() / 60.0;
+                .mapToDouble(TimeEntry::getDurationInHours)
+                .sum();
     }
 
     public double getTotalEarned() {

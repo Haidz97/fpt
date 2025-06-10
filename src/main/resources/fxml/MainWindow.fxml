@@ -12,7 +12,8 @@
 <BorderPane xmlns="http://javafx.com/javafx/22"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.fpt.controllers.MainWindowController"
-            prefHeight="800.0" prefWidth="1200.0">
+            prefHeight="800.0" prefWidth="1200.0"
+            stylesheets="@../css/workload-monitor.css">
 
     <!-- Левое меню -->
     <left>
@@ -22,10 +23,7 @@
             </padding>
             <Button text="Дашборд" maxWidth="Infinity" onAction="#showDashboard"/>
             <Button text="Проекты" maxWidth="Infinity" onAction="#showProjects"/>
-            <Button text="Календарь" maxWidth="Infinity" onAction="#showCalendar"/>
-            <Button text="Статистика" maxWidth="Infinity" onAction="#showStatistics"/>
-            <Button text="Отчеты" maxWidth="Infinity" onAction="#showReports"/>
-            <Button text="Настройки" maxWidth="Infinity" onAction="#showSettings"/>
+            <Button text="Монитор нагрузки" maxWidth="Infinity" onAction="#showWorkloadMonitor"/>
         </VBox>
     </left>
 

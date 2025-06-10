@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/main/java/com/fpt/db/migration/V1_create_projects_table" dialect="SQLite" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/fpt/db/migration/V2_create_time_entries_table" dialect="SQLite" />
-  </component>
-</project>

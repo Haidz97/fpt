@@ -28,6 +28,11 @@ public class MainWindowController {
     }
 
     @FXML
+    private void showWorkloadMonitor() {
+        loadView("WorkloadMonitor.fxml");
+    }
+
+    @FXML
     private void showCalendar() {
         // TODO: Реализовать отображение календаря
     }
@@ -52,26 +57,17 @@ public class MainWindowController {
         // TODO: Реализовать синхронизацию с Upwork
     }
 
-    private void loadView(String fxmlFile) {
+    private void loadView(String fxml) {
         try {
-            URL fxmlUrl = getClass().getResource("/fxml/" + fxmlFile);
-            if (fxmlUrl == null) {
-                System.err.println("FXML file not found: /fxml/" + fxmlFile);
-                // Попробуем альтернативный путь
-                fxmlUrl = getClass().getResource("/com/fpt/" + fxmlFile);
-                if (fxmlUrl == null) {
-                    throw new IOException("Cannot find FXML file: " + fxmlFile);
-                }
+            URL resource = getClass().getResource("/fxml/" + fxml);
+            if (resource == null) {
+                throw new IOException("FXML file not found: " + fxml);
             }
-
-            FXMLLoader loader = new FXMLLoader(fxmlUrl);
-            Parent view = loader.load();
-
-            contentArea.getChildren().clear();
-            contentArea.getChildren().add(view);
+            Parent view = FXMLLoader.load(resource);
+            contentArea.getChildren().setAll(view);
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Error loading view: " + e.getMessage());
+            // TODO: Показать сообщение об ошибке пользователю
         }
     }
 } 
