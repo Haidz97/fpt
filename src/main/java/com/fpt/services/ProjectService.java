@@ -88,6 +88,7 @@ public class ProjectService {
                 }
                 
                 project.setBudget(rs.getDouble("budget"));
+                project.setHourlyRate(rs.getDouble("hourly_rate"));
                 project.setDescription(rs.getString("description"));
                 
                 projects.add(project);
@@ -133,6 +134,7 @@ public class ProjectService {
                 }
                 
                 project.setBudget(rs.getDouble("budget"));
+                project.setHourlyRate(rs.getDouble("hourly_rate"));
                 project.setDescription(rs.getString("description"));
                 
                 return project;
@@ -168,6 +170,7 @@ public class ProjectService {
                 }
                 
                 project.setBudget(rs.getDouble("budget"));
+                project.setHourlyRate(rs.getDouble("hourly_rate"));
                 project.setDescription(rs.getString("description"));
                 
                 return project;

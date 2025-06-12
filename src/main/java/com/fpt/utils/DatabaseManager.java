@@ -42,12 +42,23 @@ public class DatabaseManager {
                     name TEXT NOT NULL,
                     description TEXT,
                     client TEXT,
+                    status TEXT NOT NULL,
+                    start_date DATE,
+                    deadline DATE,
                     budget REAL,
                     hourly_rate REAL,
-                    status TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """);
+
+            // Проверяем наличие колонки hourly_rate
+            try {
+                stmt.execute("SELECT hourly_rate FROM projects LIMIT 1");
+            } catch (SQLException e) {
+                // Если колонки нет, добавляем её
+                stmt.execute("ALTER TABLE projects ADD COLUMN hourly_rate REAL");
+            }
 
             // Создаем таблицу временных записей
             stmt.execute("""

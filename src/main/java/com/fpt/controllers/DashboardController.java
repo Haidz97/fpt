@@ -77,7 +77,7 @@ public class DashboardController {
                         double hours = entry.getDurationInHours();
                         
                         if (entry.getStartTime().isAfter(monthStart)) {
-                            monthlyIncomeValue += hours * project.getBudget();
+                            monthlyIncomeValue += hours * project.getHourlyRate();
                         }
                         
                         if (entry.getStartTime().isAfter(weekStart)) {
@@ -86,8 +86,8 @@ public class DashboardController {
                     }
                 }
 
-                if (project.getBudget() > 0) {
-                    totalHourlyRate += project.getBudget();
+                if (project.getHourlyRate() > 0) {
+                    totalHourlyRate += project.getHourlyRate();
                     projectsWithRate++;
                 }
             }

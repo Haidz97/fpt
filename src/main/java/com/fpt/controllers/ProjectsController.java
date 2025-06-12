@@ -5,6 +5,7 @@ import com.fpt.models.ProjectStatus;
 import com.fpt.models.TimeEntry;
 import com.fpt.services.ProjectService;
 import com.fpt.services.TimeEntryService;
+import com.fpt.services.WorkloadService;
 import com.fpt.services.PdfExportService;
 import com.fpt.utils.DatabaseManager;
 import javafx.collections.FXCollections;
@@ -34,9 +35,12 @@ public class ProjectsController {
     @FXML private TableColumn<Project, LocalDate> startDateColumn;
     @FXML private TableColumn<Project, LocalDate> deadlineColumn;
     @FXML private TableColumn<Project, Double> budgetColumn;
+    @FXML private TableColumn<Project, Double> hourlyRateColumn;
+    @FXML private ListView<String> workloadIssuesList;
 
     private ProjectService projectService;
     private TimeEntryService timeEntryService;
+    private WorkloadService workloadService;
     private PdfExportService pdfExportService;
     private ObservableList<Project> projectsList;
 
@@ -44,6 +48,7 @@ public class ProjectsController {
     public void initialize() {
         projectService = new ProjectService(DatabaseManager.getInstance());
         timeEntryService = new TimeEntryService(DatabaseManager.getInstance());
+        workloadService = new WorkloadService(DatabaseManager.getInstance());
         pdfExportService = new PdfExportService();
         setupTable();
         loadProjects();
@@ -56,6 +61,7 @@ public class ProjectsController {
         startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         deadlineColumn.setCellValueFactory(new PropertyValueFactory<>("deadline"));
         budgetColumn.setCellValueFactory(new PropertyValueFactory<>("budget"));
+        hourlyRateColumn.setCellValueFactory(new PropertyValueFactory<>("hourlyRate"));
 
         // Форматирование дат
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -95,12 +101,51 @@ public class ProjectsController {
                 }
             }
         });
+
+        // Форматирование почасовой ставки
+        hourlyRateColumn.setCellFactory(column -> new TableCell<Project, Double>() {
+            @Override
+            protected void updateItem(Double rate, boolean empty) {
+                super.updateItem(rate, empty);
+                if (empty || rate == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("%,.2f ₽/час", rate));
+                }
+            }
+        });
     }
 
     @FXML
     public void loadProjects() {
         projectsList = FXCollections.observableArrayList(projectService.getAllProjects());
         projectsTable.setItems(projectsList);
+        updateWorkloadIssues();
+    }
+
+    private void updateWorkloadIssues() {
+        List<TimeEntry> allTimeEntries = timeEntryService.getAllTimeEntries();
+        List<String> issues = workloadService.checkWorkloadIssues(projectsList, allTimeEntries);
+        workloadIssuesList.setItems(FXCollections.observableArrayList(issues));
+    }
+
+    @FXML
+    public void openWorkloadSettings() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/WorkloadSettings.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Настройки нагрузки");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
+            // После закрытия окна настроек обновляем предупреждения
+            updateWorkloadIssues();
+        } catch (IOException e) {
+            showError("Ошибка", "Не удалось открыть окно настроек: " + e.getMessage());
+        }
     }
 
     @FXML
@@ -148,16 +193,6 @@ public class ProjectsController {
         }
     }
 
-    @FXML
-    private void handleAddTimeEntry() {
-        Project selectedProject = projectsTable.getSelectionModel().getSelectedItem();
-        if (selectedProject != null) {
-            showTimeEntryDialog(selectedProject);
-        } else {
-            showError("Ошибка", "Выберите проект для добавления времени");
-        }
-    }
-
     private void showProjectForm(Project project) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProjectForm.fxml"));
@@ -174,12 +209,7 @@ public class ProjectsController {
 
             loadProjects();
         } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ошибка");
-            alert.setHeaderText("Ошибка загрузки формы");
-            alert.setContentText("Не удалось загрузить форму проекта: " + e.getMessage());
-            alert.showAndWait();
+            showError("Ошибка", "Не удалось загрузить форму проекта: " + e.getMessage());
         }
     }
 
@@ -201,28 +231,5 @@ public class ProjectsController {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
-    }
-
-    private void showTimeEntryDialog(Project project) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TimeEntryForm.fxml"));
-            Parent root = loader.load();
-
-            TimeEntryController controller = loader.getController();
-            controller.setProject(project);
-            
-            Stage stage = new Stage();
-            controller.setStage(stage);
-            
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Добавить запись времени");
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
-
-            // Обновляем список после закрытия диалога
-            loadProjects();
-        } catch (IOException e) {
-            showError("Ошибка", "Не удалось открыть форму добавления времени: " + e.getMessage());
-        }
     }
 } 

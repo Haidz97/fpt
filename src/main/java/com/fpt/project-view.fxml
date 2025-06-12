@@ -15,61 +15,62 @@
 
     <!-- Toolbar с кнопками действий -->
     <ToolBar>
-        <Button fx:id="exportButton" text="Export to PDF"
-                onAction="#handleExportToPdf"/>
+        <Button text="Экспорт в PDF" onAction="#handleExportPdf"/>
     </ToolBar>
 
     <!-- Основная информация о проекте -->
     <GridPane vgap="10" hgap="10">
-        <Label text="Project Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label text="Название проекта:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
         <Label fx:id="projectNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
-        <Label text="Client:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Label text="Клиент:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
         <Label fx:id="clientLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-        <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Label text="Статус:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
         <Label fx:id="statusLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-        <Label text="Start Date:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <Label text="Дата начала:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
         <Label fx:id="startDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
-        <Label text="Deadline:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <Label text="Дедлайн:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
         <Label fx:id="deadlineLabel" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
-        <Label text="Budget:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <Label text="Бюджет:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
         <Label fx:id="budgetLabel" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
-        <Label text="Hourly Rate:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+        <Label text="Часовая ставка:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
         <Label fx:id="hourlyRateLabel" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
     </GridPane>
 
     <!-- Описание проекта -->
-    <TitledPane text="Description" expanded="false">
+    <TitledPane text="Описание" expanded="false">
         <TextArea fx:id="descriptionArea" wrapText="true" editable="false"/>
     </TitledPane>
 
     <!-- Таблица записей времени -->
-    <TitledPane text="Time Entries" VBox.vgrow="ALWAYS">
-        <TableView fx:id="timeEntriesTable">
-            <columns>
-                <TableColumn fx:id="dateColumn" text="Date"/>
-                <TableColumn fx:id="startTimeColumn" text="Start Time"/>
-                <TableColumn fx:id="endTimeColumn" text="End Time"/>
-                <TableColumn fx:id="durationColumn" text="Duration"/>
-                <TableColumn fx:id="descriptionColumn" text="Description"/>
-            </columns>
-        </TableView>
+    <TitledPane text="Записи времени" VBox.vgrow="ALWAYS">
+        <VBox spacing="5">
+            <TableView fx:id="timeEntriesTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="dateColumn" text="Дата"/>
+                    <TableColumn fx:id="startTimeColumn" text="Время начала"/>
+                    <TableColumn fx:id="endTimeColumn" text="Время окончания"/>
+                    <TableColumn fx:id="durationColumn" text="Длительность"/>
+                    <TableColumn fx:id="descriptionColumn" text="Описание"/>
+                </columns>
+            </TableView>
+        </VBox>
     </TitledPane>
 
     <!-- Итоговая информация -->
     <GridPane vgap="5" hgap="10">
-        <Label text="Total Time:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label text="Всего времени:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
         <Label fx:id="totalTimeLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
-        <Label text="Total Earned:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Label text="Заработано:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
         <Label fx:id="totalEarnedLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-        <Label text="Budget Remaining:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Label text="Остаток бюджета:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
         <Label fx:id="remainingBudgetLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
     </GridPane>
 

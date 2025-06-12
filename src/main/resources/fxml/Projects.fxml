@@ -11,6 +11,7 @@
 
     <HBox spacing="10">
         <Button text="Новый проект" onAction="#handleAddProject"/>
+        <Button text="Настройки нагрузки" onAction="#openWorkloadSettings"/>
         <Region HBox.hgrow="ALWAYS"/>
         <Button text="Обновить" onAction="#loadProjects"/>
     </HBox>
@@ -23,6 +24,7 @@
             <TableColumn fx:id="startDateColumn" text="Дата начала" prefWidth="100"/>
             <TableColumn fx:id="deadlineColumn" text="Дедлайн" prefWidth="100"/>
             <TableColumn fx:id="budgetColumn" text="Бюджет" prefWidth="100"/>
+            <TableColumn fx:id="hourlyRateColumn" text="Ставка в час" prefWidth="100"/>
         </columns>
         <contextMenu>
             <ContextMenu>
@@ -35,4 +37,8 @@
             </ContextMenu>
         </contextMenu>
     </TableView>
+
+    <TitledPane text="Предупреждения" expanded="false">
+        <ListView fx:id="workloadIssuesList" prefHeight="150"/>
+    </TitledPane>
 </VBox>

@@ -28,7 +28,7 @@ public class ProjectFormController {
         projectService = new ProjectService(DatabaseManager.getInstance());
         statusComboBox.getItems().addAll(ProjectStatus.values());
 
-        // Add numeric validation for budget and hourly rate fields
+        // Добавьте числовую проверку для полей бюджета и почасовой ставки
         budgetField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*(\\.\\d*)?")) {
                 budgetField.setText(oldValue);

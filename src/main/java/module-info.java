@@ -1,4 +1,4 @@
-module com.example.fpt {
+module com.fpt {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;

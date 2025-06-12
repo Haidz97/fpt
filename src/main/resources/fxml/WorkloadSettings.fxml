@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.fpt.controllers.WorkloadSettingsController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <GridPane vgap="10" hgap="10">
+        <Label text="Максимальная дневная нагрузка (часов):" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Spinner fx:id="maxDailyHoursSpinner" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Максимальная недельная нагрузка (часов):" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Spinner fx:id="maxWeeklyHoursSpinner" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Желаемое количество проектов:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Spinner fx:id="desiredProjectCountSpinner" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="За сколько дней предупреждать о дедлайне:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <Spinner fx:id="deadlineWarningDaysSpinner" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    </GridPane>
+
+    <TitledPane text="Уведомления" collapsible="false">
+        <VBox spacing="5">
+            <CheckBox fx:id="deadlineNotificationsCheckBox" text="Уведомления о приближающихся дедлайнах"/>
+            <CheckBox fx:id="workloadNotificationsCheckBox" text="Предупреждения о превышении рабочего времени"/>
+            <CheckBox fx:id="scheduleConflictNotificationsCheckBox" text="Оповещения о конфликтах в расписании"/>
+        </VBox>
+    </TitledPane>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Сохранить" onAction="#handleSave"/>
+        <Button text="Отмена" onAction="#handleCancel"/>
+    </HBox>
+</VBox> 
