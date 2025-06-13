@@ -98,19 +98,28 @@ public class MainWindowController {
         }
     }
 
-    private void loadView(String fxml) {
+    private void loadView(String fxmlFile) {
         try {
-            URL resource = getClass().getResource("/fxml/" + fxml);
-            if (resource == null) {
-                throw new IOException("FXML файл не найден: " + fxml);
+            System.out.println("Loading view: " + fxmlFile); // Debug log
+            URL fxmlUrl = getClass().getResource("/fxml/" + fxmlFile);
+            if (fxmlUrl == null) {
+                System.err.println("FXML file not found: " + fxmlFile); // Debug log
+                throw new IOException("Cannot find FXML file: " + fxmlFile);
             }
-            Parent view = FXMLLoader.load(resource);
-            contentArea.getChildren().setAll(view);
+            System.out.println("FXML URL: " + fxmlUrl); // Debug log
+            
+            FXMLLoader loader = new FXMLLoader(fxmlUrl);
+            Parent view = loader.load();
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(view);
         } catch (IOException e) {
+            System.err.println("Error loading view " + fxmlFile + ": " + e.getMessage()); // Debug log
+            e.printStackTrace();
+            
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ошибка");
-            alert.setHeaderText("Не удалось загрузить представление");
-            alert.setContentText("Произошла ошибка при загрузке " + fxml + ": " + e.getMessage());
+            alert.setTitle("Ошибка загрузки");
+            alert.setHeaderText(null);
+            alert.setContentText("Не удалось загрузить " + fxmlFile + ": " + e.getMessage());
             alert.showAndWait();
         }
     }
