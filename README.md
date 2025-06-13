@@ -1,8 +1,8 @@
-# Deadline Tracker
+# Freelance project-tracker
 
 ## 1. Наименование программы
 
-Программа "Deadline Tracker" (ManagerStatus)
+Программа "Freelance project-tracker" (ManagerStatus)
 
 ## 2. Назначение программы
 
