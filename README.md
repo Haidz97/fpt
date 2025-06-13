@@ -2,7 +2,7 @@
 
 ## 1. Наименование программы
 
-Программа "Freelance project-tracker" (ManagerStatus)
+Программа "Freelance project-tracker" 
 
 ## 2. Назначение программы
 
